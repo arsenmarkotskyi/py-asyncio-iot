@@ -31,19 +31,6 @@ async def main() -> None:
         service.register_device(toilet),
     )
 
-    # create a few programs
-    # wake_up_program = [
-    #     Message(hue_light_id, MessageType.SWITCH_ON),
-    #     Message(speaker_id, MessageType.SWITCH_ON),
-    #     Message(speaker_id, MessageType.PLAY_SONG, "Rick Astley - Never Gonna Give You Up"),
-    # ]
-    #
-    # sleep_program = [
-    #     Message(hue_light_id, MessageType.SWITCH_OFF),
-    #     Message(speaker_id, MessageType.SWITCH_OFF),
-    #     Message(toilet_id, MessageType.FLUSH),
-    #     Message(toilet_id, MessageType.CLEAN),
-    # ]
     async def wake_up(service: IOTService) -> None:
         await run_parallel(
             service.send_msg(Message(hue_light_id, MessageType.SWITCH_ON)),
@@ -69,8 +56,6 @@ async def main() -> None:
         )
 
     # run the programs
-    # await service.run_program(wake_up_program)
-    # await service.run_program(sleep_program)
     await wake_up(service)
     await sleep(service)
 
